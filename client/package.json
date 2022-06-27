@@ -1,0 +1,21 @@
+{
+  "name": "movies-api",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^2.9.9"
+  },
+  "dependencies": {
+    "@alpinejs/persist": "^3.10.2",
+    "alpinejs": "^3.10.2",
+    "axios": "^0.27.2",
+    "everyday-fun": "^1.1.0",
+    "express": "^4.18.1",
+    "jsonwebtoken": "^8.5.1"
+  }
+}

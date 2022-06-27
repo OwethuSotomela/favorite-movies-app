@@ -9,11 +9,45 @@
 </head>
 
 <body>
-    
+
     <div x-data="isOpen" class="container">
         <div class="row">
             <div class="col-12">
                 <h5>Fave Movies API</h5>
+            </div>
+            <div x-show="appState == 'SIGNUP'" class="signup">
+
+                <center>
+                    <h4>Signup</h4>
+                </center>
+
+                <label>Firstname</label>
+                <input type="text" x-model="user.firstname" placeholder="Enter your firstname">
+                <label>Lastname</label>
+                <input type="text" x-model="user.lastname" placeholder="Enter your lastname">
+                <label>Username</label>
+                <input type="text" x-model="user.username" placeholder="Create a username">
+                <label>Password</label>
+                <input type="password" x-model="user.password" placeholder="Enter your password">
+                <button @click="signup()" class="singupBtn">SignUp</button>
+                <a href="#" @click="gotToLogin()">Already have an account? Login</a>
+
+            </div>
+            <div x-show="appState == 'LOGIN'" class="login">
+
+                <center>
+                    <h4>Login</h4>
+                </center>
+
+                <label>Username</label>
+                <input type="text" x-model="logUser.username" placeholder="Enter your username">
+                <label>Password</label>
+                <input type="password" x-model="logUser.password" placeholder="Enter your password">
+                <button @click="login()" class="singupBtn">Login</button>
+                <a href="#" @click="gotToSignUp()">Don't have account? SignUp</a>
+            </div>
+            <div x-show="appState == 'HOME'" class="myHome">
+                This is the app then
             </div>
         </div>
     </div>
