@@ -1,4 +1,5 @@
-CREATE TABLE user(
+DROP TABLE IF EXISTS;
+CREATE TABLE users(
     id SERIAL NOT NULL PRIMARY KEY,
     firstname VARCHAR NOT NULL,
     lastname VARCHAR NOT NULL,
@@ -6,8 +7,11 @@ CREATE TABLE user(
     password varchar(255) NOT NULL
 );
 
--- CREATE TABLE user_playlist(
---     id SERIAL NOT NULL PRIMARY KEY,
---     user_id 
---     movie_list 
---     );
+DROP TABLE IF EXISTS;
+CREATE TABLE user_playlist(
+    id SERIAL NOT NULL PRIMARY KEY,
+    users_id int,
+    movie_list VARCHAR NOT NULL,
+    FOREIGN KEY (users_id) REFERENCES users(id)
+
+    );
