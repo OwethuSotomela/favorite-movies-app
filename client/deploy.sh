@@ -19,6 +19,7 @@ git commit -m 'deploy'
 
 # Add your GitHub repo details here
 
-git push -f https://github.com/OwethuSotomela/movies-api.git main
+git push -f https://github.com/OwethuSotomela/favorite-movies-app.git main
+
 
 cd -

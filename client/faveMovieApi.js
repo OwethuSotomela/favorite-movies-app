@@ -9,6 +9,11 @@ export default function MovieAPI() {
     return {
         appState: 'LOGIN',
         isOpen: false,
+        apiKey: '74c04fd4828b28c1f0cefa3baff1bbfa',
+        moviesFound: null,
+        name: null,
+        pic: null,
+        image: null,
         user: {
             firstname: null,
             lastname: null,
@@ -19,6 +24,7 @@ export default function MovieAPI() {
             username: null,
             password: null
         },
+        movieSearch: null,
         users: [],
         token: null,
         gotToSignUp() {
@@ -71,8 +77,30 @@ export default function MovieAPI() {
                 return null;
             }
         },
-        playlist(){
-            alert('Hi, Oz!')
-        }
+        findMovies() {
+            const myKey = this.apiKey
+            const findMovie = this.movieSearch
+            axios
+                .get(`https://api.themoviedb.org/3/search/movie?api_key=${myKey}&query=${findMovie}`)
+                .then((myMovies) => {
+                    console.log(myMovies)
+            
+                    this.moviesFound = JSON.stringify(myMovies.data)
+                    // this.moviesFound = myMovies.data.id 
+                    // this.name = myMovies.data.title
+                    // this.pic = myMovies.data.backdrop_path
+                    // this.image = myMovies.data.poster_path
+                    // console.log(this.title, this.pic, this.name)
+                })
+                .catch((err) => {
+                    console.log(err)
+                });
+
+        },
+        logout() {
+            this.isOpen = !this.isOpen
+            this.appState = appState.Login
+            localStorage.clear()
+        },
     }
 }
