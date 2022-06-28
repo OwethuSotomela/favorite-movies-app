@@ -96,7 +96,6 @@ export default function MovieAPI() {
                 .catch((err) => {
                     console.log(err)
                 });
-
         },
         logout() {
             this.isOpen = !this.isOpen
