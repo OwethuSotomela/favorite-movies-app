@@ -84,14 +84,15 @@ export default function MovieAPI() {
                 .get(`https://api.themoviedb.org/3/search/movie?api_key=${myKey}&query=${findMovie}`)
                 .then((myMovies) => {
                     console.log(myMovies)
-            
-                    this.moviesFound = JSON.stringify(myMovies.data)
-                    // this.moviesFound = myMovies.data.id 
-                    // this.name = myMovies.data.title
-                    // this.pic = myMovies.data.backdrop_path
-                    // this.image = myMovies.data.poster_path
-                    // console.log(this.title, this.pic, this.name)
+
+                    const { results } = myMovies.data
+        
+                    this.moviesFound = results
+
+                    console.log(results);
+                    
                 })
+                .then(console.log)
                 .catch((err) => {
                     console.log(err)
                 });

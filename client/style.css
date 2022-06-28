@@ -1,5 +1,30 @@
-h1{
+h1 {
     text-align: center;
     margin-top: 1em;
     margin-bottom: 1em;
+}
+h2{
+    text-align: center;
+}
+
+img {
+    display: inline-block;
+    height: 15em;
+    width: 15em;
+    text-align: center;
+}
+
+.allMovies {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+.movies {
+    flex: 1;
+    background-color: #F6F6F2;
+    border: 2px solid #2D3E4E;
+    padding: 1em;
+    margin: 0.25em;
+    border-radius: 0.5em;
+    box-shadow: 0 20px 25px 0 rgba(0, 0, 0, 1), 0 6px 20px 0 rgba(0, 0, 0, 1);
 }
