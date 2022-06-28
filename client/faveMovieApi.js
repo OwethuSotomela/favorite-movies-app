@@ -14,6 +14,12 @@ export default function MovieAPI() {
         name: null,
         pic: null,
         image: null,
+        init() {
+            if (localStorage['user']) {
+              this.isOpen = true;
+              this.appState = appState.Home
+            }
+          },
         user: {
             firstname: null,
             lastname: null,
