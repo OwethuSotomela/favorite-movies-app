@@ -27,11 +27,13 @@
                 <input type="text" x-model="user.firstname" placeholder="Enter your firstname">
                 <label>Lastname</label>
                 <input type="text" x-model="user.lastname" placeholder="Enter your lastname">
+                <br>
                 <label>Username</label>
                 <input type="text" x-model="user.username" placeholder="Create a username">
                 <label>Password</label>
                 <input type="password" x-model="user.password" placeholder="Enter your password">
                 <button @click="signup()" class="btn btn-outline-secondary">SignUp</button>
+                <br>
                 <a href="#" @click="gotToLogin()">Already have an account? Login</a>
                 <hr>
 
@@ -46,6 +48,7 @@
                 <label>Password</label>
                 <input type="password" x-model="logUser.password" placeholder="Enter your password">
                 <button @click="login()" class="btn btn-outline-success">Login</button>
+                <br>
                 <a href="#" @click="gotToSignUp()">Don't have account? SignUp</a>
                 <hr>
 
