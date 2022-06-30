@@ -69,11 +69,16 @@
                         <div class="movies">
                             <h2 x-text="movie.title"></h2>
                             <img x-bind:src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" />
-                            <button @click="addToPlaylist(movie)" class="addBtn">+</button>
+                            <button @click="addToPlaylist(movie)" class="addBtn">Add to playlist</button>
                         </div>
                     </template>
                 </div>
+                <div class="displayMovies">
+                    <button @click="gettingUserPlaylist()" class="btn btn-outline-info">Go to Playlist</button>
+                    <div x-text="myPlaylist" class="userPlaylist">
 
+                    </div>
+                </div>
                 <button @click="logout()" class="btn btn-outline-danger">Logout</button>
             </div>
         </div>

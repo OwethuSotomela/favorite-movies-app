@@ -1,7 +1,17 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require('bcryptjs');
+const axios = require('axios');
 
 module.exports = function (app, db) {
+
+    async function getMovieById(id) {
+        return axios
+            .get(`https://api.themoviedb.org/3/movie/${id}?api_key=74c04fd4828b28c1f0cefa3baff1bbfa&append_to_response=videos`)
+            .then((myMovie) => {
+                return myMovie.data
+            })
+
+    }
 
     app.get('/api/test', function (req, res) {
         res.json({
@@ -81,38 +91,55 @@ module.exports = function (app, db) {
         try {
             const { username } = req.body
 
-            console.log({username})
-
             const { id } = req.params;
 
-            console.log({id})
+            const user = await db.oneOrNone(`SELECT * FROM users WHERE username = $1`, [username])
 
-            const user = await db.none(`SELECT * FROM users WHERE username = $1`, [username])
-            console.log({user})
-            if(!user){
+            if (!user) {
                 console.log('No one home')
-            }else{
+            } else {
+                await db.none(`INSERT INTO user_playlist (users_id, movie_list) VALUES ($1, $2)`, [user.id, id])
 
-            await db.none(`INSERT INTO user_playlist (users_id, movie_list) VALUES ($1, $2)`, [user.id, movie])
-
-
-            res.status(200).json({
-                message: 'Movies inserted into the playlist',
-                user
-            })
+                res.status(200).json({
+                    message: 'Movies inserted into the playlist',
+                    user
+                })
             }
-                
+
         } catch (error) {
-                console.error(error.message);
+            console.error(error.message);
         }
     })
 
-    app.post('/playlist', async function (req, res) {
+    app.get('/api/playlist', async function (req, res) {
         try {
 
+            const { username } = req.body
+
+            const user = await db.oneOrNone(`SELECT * FROM users WHERE username = $1`, [username])
+
+            if (!user) {
+                console.log('No user here')
+            }
+
+            const movieIds = await db.manyOrNone(`SELECT * FROM user_playlist WHERE users_id = $1`, [user.id]);
+
+            const moviesPromises = movieIds.map(async (movie) => {
+                return await getMovieById(movie.movie_list)
+            })
+
+            const movies = await Promise.all(moviesPromises)
+
+            console.log(movies, moviesPromises)
+
+            res.json({
+                user: user,
+                data: movies,
+            })
         } catch {
 
         }
     })
 
 }
+

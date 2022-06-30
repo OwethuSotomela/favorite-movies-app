@@ -46,3 +46,20 @@ img {
 ::placeholder {
     text-align: center;
 }
+.displayMovies{
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+.addBtn{
+    margin-top: 1em;
+    background-color: green;
+    color: white;
+    border-radius: 12px;
+    padding: 8px 14px;
+    text-align: center;
+    align-items: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: large;
+}
