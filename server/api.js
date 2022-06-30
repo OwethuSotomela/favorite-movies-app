@@ -15,6 +15,15 @@ module.exports = function (app, db) {
 
             console.log({ firstname, lastname, username, password });
 
+            console.log({ username });
+
+            if (username == null) {
+                throw new Error("Username should be entered")
+            }
+
+            if (password == null) {
+                throw new Error("Password should be entered")
+            }
 
             var newUser = await db.oneOrNone("SELECT * FROM users WHERE username = $1", [username])
 
@@ -49,20 +58,52 @@ module.exports = function (app, db) {
                 if (!isValidUser) {
                     return res.status(500).json({
                         success: false,
-                        access_token: null
+                        access_token: null,
+                        user: null
                     });
                 }
             } else {
                 jwt.sign({ user }, 'secret', { expiresIn: '24h' }, (err, token) => {
                     return res.json({
                         success: true,
-                        access_token: token
+                        access_token: token,
+                        user: user
                     });
                 })
             }
 
         } catch (error) {
             console.error(error.message);
+        }
+    })
+
+    app.post('/api/movie/:id', async function (req, res) {
+        try {
+            const { username } = req.body
+
+            console.log({username})
+
+            const { id } = req.params;
+
+            console.log({id})
+
+            const user = await db.none(`SELECT * FROM users WHERE username = $1`, [username])
+            console.log({user})
+            if(!user){
+                console.log('No one home')
+            }else{
+
+            await db.none(`INSERT INTO user_playlist (users_id, movie_list) VALUES ($1, $2)`, [user.id, movie])
+
+
+            res.status(200).json({
+                message: 'Movies inserted into the playlist',
+                user
+            })
+            }
+                
+        } catch (error) {
+                console.error(error.message);
         }
     })
 
