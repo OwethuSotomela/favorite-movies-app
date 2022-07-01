@@ -18,8 +18,8 @@ h4 {
 }
 
 img {
-    height: 15em;
-    width: 15em;
+    height: 10em;
+    width: 12em;
     text-align: center;
     margin: auto;
     display: block;
@@ -56,10 +56,21 @@ img {
     background-color: green;
     color: white;
     border-radius: 12px;
-    padding: 8px 14px;
+    padding: 7px 13px;
     text-align: center;
     align-items: center;
     text-decoration: none;
     display: inline-block;
     font-size: large;
 }
+
+.myHome{
+    margin-bottom: 2em;
+}
+.userPlaylist{
+    margin: 2em;
+}
+
+/* .feedback{
+    font-size: 3em;
+} */

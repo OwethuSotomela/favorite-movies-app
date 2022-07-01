@@ -18,7 +18,7 @@
                 <h1>Fave Movies API</h1>
             </div>
             <div x-show="appState == 'SIGNUP'" class="signup">
-                <span x-text="feedback">Feedback</span>
+                <span x-text="feedback" class="feedback">Feedback</span>
                 <center>
                     <h4>Signup</h4>
                 </center>
@@ -67,7 +67,7 @@
                 <div class="allMovies">
                     <template x-for="movie in moviesFound">
                         <div class="movies">
-                            <h2 x-text="movie.title"></h2>
+                            <h3 x-text="movie.title"></h3>
                             <img x-bind:src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" />
                             <button @click="addToPlaylist(movie)" class="addBtn">Add to playlist</button>
                         </div>

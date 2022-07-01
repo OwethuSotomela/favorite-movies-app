@@ -101,7 +101,7 @@ module.exports = function (app, db) {
                 await db.none(`INSERT INTO user_playlist (users_id, movie_list) VALUES ($1, $2)`, [user.id, id])
 
                 res.status(200).json({
-                    message: 'Movies inserted into the playlist',
+                    message: 'A movie added into the playlist',
                     user
                 })
             }
@@ -111,13 +111,13 @@ module.exports = function (app, db) {
         }
     })
 
-    app.get('/api/playlist', async function (req, res) {
+    app.get('/api/playlist/:username', async function (req, res) {
         try {
 
-            const { username } = req.body
+            const { username } = req.params
 
             const user = await db.oneOrNone(`SELECT * FROM users WHERE username = $1`, [username])
-
+            console.log(user, username);
             if (!user) {
                 console.log('No user here')
             }
@@ -130,14 +130,17 @@ module.exports = function (app, db) {
 
             const movies = await Promise.all(moviesPromises)
 
-            console.log(movies, moviesPromises)
+            // console.log(movies)
 
             res.json({
                 user: user,
                 data: movies,
             })
-        } catch {
-
+        } catch(e) {
+            console.log(e)
+            res.status(500).json({
+               error: e.message
+            })
         }
     })
 

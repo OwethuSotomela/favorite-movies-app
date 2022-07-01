@@ -10,7 +10,6 @@ export default function MovieAPI() {
         appState: 'LOGIN',
         isOpen: false,
         apiKey: '74c04fd4828b28c1f0cefa3baff1bbfa',
-        baseURL: 'https://image.tmdb.org/t/p/original/',
         moviesFound: null,
         name: null,
         pic: null,
@@ -106,18 +105,18 @@ export default function MovieAPI() {
                 });
         },
         addToPlaylist(addFaveMovie) {
-
-            console.log(addFaveMovie)
-
             try {
                 const { username } = this.user.username ? this.user : JSON.parse(localStorage.getItem('user'))
 
                 axios
                     .post(`http://localhost:5000/api/movie/${addFaveMovie.id}`, { username })
-                    .then((myMovies) => {
-                        console.log(myMovies)
+                    .then(result => result.data)
+                    .then((data) => {
+                        console.log(data)
 
                         this.user = data.user;
+                        console.log(this.user)
+
                         localStorage.setItem('user', JSON.stringify(data.user));
                     })
                 this.feedback = data.message
@@ -129,24 +128,21 @@ export default function MovieAPI() {
             }
         },
         gettingUserPlaylist() {
-            // console.log(id)
-            alert('I')
             const { username } = this.user.username ? this.user : JSON.parse(localStorage.getItem('user'))
-
+            
             axios
-                .get(`http://localhost:5000/api/playlist`, {username})
-                // .then(respose => respose.json())
+                .get(`http://localhost:5000/api/playlist/${username}`)
                 .then((myMovies) => {
-                    console.log(myMovies.data)
-                    // console.log(respose)
-                    alert('am')
+                    console.log(myMovies)
 
-                    this.user = data.user;
+                    this.myPlaylist = myMovies.data
+                    this.user = myMovies.user;
 
-                    localStorage.setItem('user', JSON.stringify(data.user));
-
+                    localStorage.setItem('user', JSON.stringify(myMovies.user));
+                }).catch(e => {
+                    console.log(e);
+                    alert('Error')
                 })
-
         },
         logout() {
             this.isOpen = !this.isOpen
