@@ -131,7 +131,7 @@ export default function MovieAPI() {
         gettingUserPlaylist() {
             // console.log(id)
             alert('I')
-            // const { username } = this.user.username ? this.user : JSON.parse(localStorage.getItem('user'))
+            const { username } = this.user.username ? this.user : JSON.parse(localStorage.getItem('user'))
 
             axios
                 .get(`http://localhost:5000/api/playlist`, {username})
