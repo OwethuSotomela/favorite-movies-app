@@ -75,7 +75,16 @@
                 </div>
                 <div class="displayMovies">
                     <button @click="gettingUserPlaylist()" class="btn btn-outline-info">Go to Playlist</button>
-                    <div x-text="myPlaylist" class="userPlaylist">
+                    <div class="userPlaylist">
+
+                        <!-- here  -->
+                        <template x-for="faveMovie in myPlaylist">
+                            <div class="movies">
+                                <h3 x-text="faveMovie.title"></h3>
+                                <img x-bind:src="`https://image.tmdb.org/t/p/w500${faveMovie.poster_path}`" />
+                            </div>
+                        </template>
+                        <!-- end  -->
 
                     </div>
                 </div>

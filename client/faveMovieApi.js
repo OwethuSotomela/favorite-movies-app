@@ -107,7 +107,6 @@ export default function MovieAPI() {
         addToPlaylist(addFaveMovie) {
             try {
                 const { username } = this.user.username ? this.user : JSON.parse(localStorage.getItem('user'))
-
                 axios
                     .post(`http://localhost:5000/api/movie/${addFaveMovie.id}`, { username })
                     .then(result => result.data)
@@ -117,25 +116,27 @@ export default function MovieAPI() {
                         this.user = data.user;
                         console.log(this.user)
 
-                        localStorage.setItem('user', JSON.stringify(data.user));
+                        localStorage.setItem('user', JSON.stringify(this.user));
                     })
                 this.feedback = data.message
                 setTimeout(() => {
                     this.feedback = ''
                 }, 3000)
             } catch (err) {
-                alert(err);
+                alert(err.message);
             }
         },
         gettingUserPlaylist() {
-            const { username } = this.user.username ? this.user : JSON.parse(localStorage.getItem('user'))
-            
+            // const { username } = this.user.username ? this.user : JSON.parse(localStorage.getItem('user'))
+            // alert(username)
+            const username = 'OwSoto'
             axios
                 .get(`http://localhost:5000/api/playlist/${username}`)
                 .then((myMovies) => {
                     console.log(myMovies)
 
-                    this.myPlaylist = myMovies.data
+                    this.myPlaylist = JSON.stringify(myMovies.data)
+                    console.log(this.myPlaylist)
                     this.user = myMovies.user;
 
                     localStorage.setItem('user', JSON.stringify(myMovies.user));
@@ -148,6 +149,6 @@ export default function MovieAPI() {
             this.isOpen = !this.isOpen
             this.appState = appState.Login
             localStorage.clear()
-        },
+        }
     }
 }
