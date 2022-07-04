@@ -43,15 +43,28 @@ img {
     box-shadow: 0 20px 25px 0 rgba(0, 0, 0, 1), 0 6px 20px 0 rgba(0, 0, 0, 1);
 }
 
+.myFaveMovies {
+    flex: 1;
+    background-color: #F6F6F2;
+    border: 2px solid #2D3E4E;
+    padding: 1em;
+    margin: 0.25em;
+    border-radius: 0.5em;
+    box-shadow: 0 20px 25px 0 rgba(0, 0, 0, 1), 0 6px 20px 0 rgba(0, 0, 0, 1);
+}
+
 ::placeholder {
     text-align: center;
 }
-.displayMovies{
+
+.faveMovies {
+    display: flex;
+    flex-wrap: wrap;
     margin-top: 2em;
     margin-bottom: 2em;
 }
 
-.addBtn{
+.addBtn {
     margin-top: 1em;
     background-color: green;
     color: white;
@@ -64,11 +77,24 @@ img {
     font-size: large;
 }
 
-.myHome{
+.myHome {
     margin-bottom: 2em;
 }
-.userPlaylist{
+
+.userPlaylist {
     margin: 2em;
+}
+
+.deleteBtn {
+    background-color: red;
+    color: white;
+    border-radius: 12px;
+    padding: 8px 14px;
+    text-align: center;
+    align-items: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: large;
 }
 
 /* .feedback{

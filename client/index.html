@@ -76,16 +76,13 @@
                 <div class="displayMovies">
                     <button @click="gettingUserPlaylist()" class="btn btn-outline-info">Go to Playlist</button>
                     <div class="userPlaylist">
-
-                        <!-- here  -->
                         <template x-for="faveMovie in myPlaylist">
                             <div class="movies">
                                 <h3 x-text="faveMovie.title"></h3>
                                 <img x-bind:src="`https://image.tmdb.org/t/p/w500${faveMovie.poster_path}`" />
+                                <button @click="deleteMovie(faveMovie)" class="deleteBtn">x</button>
                             </div>
                         </template>
-                        <!-- end  -->
-
                     </div>
                 </div>
                 <button @click="logout()" class="btn btn-outline-danger">Logout</button>

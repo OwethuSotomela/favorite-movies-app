@@ -17,25 +17,25 @@ export default function MovieAPI() {
         feedback: null,
         myPlaylist: null,
         init() {
-            if (localStorage['user']) {
+            if (localStorage['user'] !== 'undefined') {
                 this.isOpen = true;
                 this.appState = appState.Home
                 this.user = localStorage.getItem('user')
             }
         },
         user: {
-            firstname: null,
-            lastname: null,
-            username: null,
-            password: null
+            firstname: '',
+            lastname: '',
+            username: '',
+            password: ''
         },
         logUser: {
-            username: null,
-            password: null
+            username: '',
+            password: ''
         },
-        movieSearch: null,
+        movieSearch: '',
         users: [],
-        token: null,
+        token: '',
         gotToSignUp() {
             this.appState = appState.Signup;
         },
@@ -111,12 +111,7 @@ export default function MovieAPI() {
                     .post(`http://localhost:5000/api/movie/${addFaveMovie.id}`, { username })
                     .then(result => result.data)
                     .then((data) => {
-                        console.log(data)
-
-                        this.user = data.user;
-                        console.log(this.user)
-
-                        localStorage.setItem('user', JSON.stringify(this.user));
+                        this.gettingUserPlaylist()
                     })
                 this.feedback = data.message
                 setTimeout(() => {
@@ -127,23 +122,37 @@ export default function MovieAPI() {
             }
         },
         gettingUserPlaylist() {
-            // const { username } = this.user.username ? this.user : JSON.parse(localStorage.getItem('user'))
-            // alert(username)
-            const username = 'OwSoto'
+            const { username } = this.user.username ? this.user : JSON.parse(localStorage.getItem('user'))
             axios
                 .get(`http://localhost:5000/api/playlist/${username}`)
+                .then(r => r.data)
                 .then((myMovies) => {
-                    console.log(myMovies)
+                    // console.log(myMovies)
 
-                    this.myPlaylist = JSON.stringify(myMovies.data)
-                    console.log(this.myPlaylist)
+                    this.myPlaylist = myMovies.data
+                    // console.log(this.myPlaylist, '------')
                     this.user = myMovies.user;
 
-                    localStorage.setItem('user', JSON.stringify(myMovies.user));
+                    localStorage.setItem('user', JSON.stringify(this.user));
                 }).catch(e => {
                     console.log(e);
-                    alert('Error')
+                    // alert('Error')
                 })
+        },
+        deleteMovie(faveMovie) {
+            console.log(faveMovie.id)
+            try {
+                axios
+                    .delete(`http://localhost:5000/api/playlist/${faveMovie.id}`)
+                    .then(() => this.gettingUserPlaylist())
+                    .catch(e => {
+                        console.log(e);
+                        alert('Error')
+                    })
+            } catch (e) {
+                console.log(e.message)
+
+            }
         },
         logout() {
             this.isOpen = !this.isOpen
