@@ -2,7 +2,7 @@ h1 {
     text-align: center;
     margin-top: 1em;
     margin-bottom: 1em;
-    text-shadow: 2px 2px 5px white;
+    text-shadow: 2px 2px 5px #292929;
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
     font-style: oblique;
@@ -18,8 +18,8 @@ h4 {
 }
 
 img {
-    height: 10em;
-    width: 12em;
+    height: 8em;
+    width: 11em;
     text-align: center;
     margin: auto;
     display: block;
@@ -68,13 +68,13 @@ img {
     margin-top: 1em;
     background-color: green;
     color: white;
-    border-radius: 11px;
+    border-radius: 7px;
     padding: 4px 10px;
     text-align: center;
     align-items: center;
     text-decoration: none;
     display: inline-block;
-    font-size: large;
+    font-size:small;
 }
 
 .myHome {
@@ -98,6 +98,9 @@ img {
 }
 h4{
     text-align: center;
+    text-shadow:  2px 2px 5px aqua;
+    font-style: oblique;
+    color: grey;
 }
 
 /* .feedback{

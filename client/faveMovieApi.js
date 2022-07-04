@@ -127,10 +127,8 @@ export default function MovieAPI() {
                 .get(`http://localhost:5000/api/playlist/${username}`)
                 .then(r => r.data)
                 .then((myMovies) => {
-                    // console.log(myMovies)
 
                     this.myPlaylist = myMovies.data
-                    // console.log(this.myPlaylist, '------')
                     this.user = myMovies.user;
 
                     localStorage.setItem('user', JSON.stringify(this.user));
@@ -140,14 +138,13 @@ export default function MovieAPI() {
                 })
         },
         deleteMovie(faveMovie) {
-            console.log(faveMovie.id)
             try {
                 axios
                     .delete(`http://localhost:5000/api/playlist/${faveMovie.id}`)
                     .then(() => this.gettingUserPlaylist())
                     .catch(e => {
                         console.log(e);
-                        alert('Error')
+                        // alert('Error')
                     })
             } catch (e) {
                 console.log(e.message)
