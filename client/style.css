@@ -13,9 +13,22 @@ h2 {
 }
 
 h4 {
+    margin-bottom: 1em;
+    text-align: center;
+    text-shadow: 2px 2px 5px grey;
+    font-style: oblique;
+    color: grey;
+}
+
+h5 {
     margin-top: 1em;
     margin-bottom: 1em;
+    text-align: center;
+    text-shadow: 2px 2px 5px grey;
+    font-style: oblique;
+    color: grey;
 }
+
 
 img {
     height: 8em;
@@ -31,6 +44,12 @@ img {
     flex-wrap: wrap;
     margin-top: 2em;
     margin-bottom: 2em;
+}
+
+.userPlaylist {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 2em;
 }
 
 .movies {
@@ -53,10 +72,6 @@ img {
     box-shadow: 0 20px 25px 0 rgba(0, 0, 0, 1), 0 6px 20px 0 rgba(0, 0, 0, 1);
 }
 
-::placeholder {
-    text-align: center;
-}
-
 .faveMovies {
     display: flex;
     flex-wrap: wrap;
@@ -74,15 +89,7 @@ img {
     align-items: center;
     text-decoration: none;
     display: inline-block;
-    font-size:small;
-}
-
-.myHome {
-    margin-bottom: 2em;
-}
-
-.userPlaylist {
-    margin: 2em;
+    font-size: small;
 }
 
 .deleteBtn {
@@ -96,11 +103,13 @@ img {
     display: inline-block;
     font-size: large;
 }
-h4{
+
+.myHome {
+    margin-bottom: 2em;
+}
+
+::placeholder {
     text-align: center;
-    text-shadow:  2px 2px 5px aqua;
-    font-style: oblique;
-    color: grey;
 }
 
 /* .feedback{

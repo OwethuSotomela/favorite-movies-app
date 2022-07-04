@@ -117,7 +117,7 @@ module.exports = function (app, db) {
             const { username } = req.params
 
             const user = await db.oneOrNone(`SELECT * FROM users WHERE username = $1`, [username])
-            console.log(user, username);
+            
             if (!user) {
                 console.log('No user here')
             }
@@ -130,8 +130,6 @@ module.exports = function (app, db) {
 
             const movies = await Promise.all(moviesPromises)
 
-            // console.log(movies)
-
             res.json({
                 user: user,
                 data: movies,
@@ -143,6 +141,24 @@ module.exports = function (app, db) {
             })
         }
     })
+
+	app.delete('/api/playlist/:id', async function (req, res) {
+
+		try {
+			const { id } = req.params;
+			const movieRemoved = await db.one(`DELETE FROM user_playlist WHERE movie_list = $1`, [id])
+
+			res.json({
+				message: 'Movie deleted',
+				data: movieRemoved
+			})
+		} catch (err) {
+			res.json({
+				status: 'Failed to delete',
+				error: err.stack
+			})
+		}
+	})
 
 }
 

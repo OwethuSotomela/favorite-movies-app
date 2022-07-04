@@ -76,7 +76,7 @@
 
                 <div class="displayMovies">
                     <button @click="gettingUserPlaylist()" class="btn btn-outline-info">Go to Playlist</button>
-                    <h4>Movies in Playlist <span x-text="myPlaylist.length"></span></h4>
+                    <h5>Movies in Playlist <span x-text="myPlaylist.length"></span></h5>
                     <div class="userPlaylist">
                         <template x-for="faveMovie in myPlaylist">
                             <div class="movies">
@@ -87,6 +87,7 @@
                         </template>
                     </div>
                 </div>
+                
                 <button @click="logout()" class="btn btn-outline-danger">Logout</button>
             </div>
         </div>
