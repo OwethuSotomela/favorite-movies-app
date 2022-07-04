@@ -68,8 +68,8 @@ img {
     margin-top: 1em;
     background-color: green;
     color: white;
-    border-radius: 12px;
-    padding: 7px 13px;
+    border-radius: 11px;
+    padding: 4px 10px;
     text-align: center;
     align-items: center;
     text-decoration: none;
@@ -88,13 +88,16 @@ img {
 .deleteBtn {
     background-color: red;
     color: white;
-    border-radius: 12px;
-    padding: 8px 14px;
+    border-radius: 8px;
+    padding: 3px 9px;
     text-align: center;
     align-items: center;
     text-decoration: none;
     display: inline-block;
     font-size: large;
+}
+h4{
+    text-align: center;
 }
 
 /* .feedback{

@@ -118,7 +118,7 @@ export default function MovieAPI() {
                     this.feedback = ''
                 }, 3000)
             } catch (err) {
-                alert(err.message);
+                // alert(err.message);
             }
         },
         gettingUserPlaylist() {
