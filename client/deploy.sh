@@ -9,7 +9,7 @@ npm run build
 # navigate into the build output directory
 cd dist
 
-# if you are deploying to a custom domain
+# if you are deploying to a custom domaincd
 # echo 'www.example.com' > CNAME
 
 git init
@@ -22,4 +22,4 @@ git commit -m 'deploy'
 git push -f https://github.com/OwethuSotomela/favorite-movies-app.git main
 
 
-cd -
+cd - 

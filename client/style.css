@@ -29,7 +29,6 @@ h5 {
     color: grey;
 }
 
-
 img {
     height: 8em;
     width: 11em;
@@ -93,6 +92,7 @@ img {
 }
 
 .deleteBtn {
+    margin-top: 1em;
     background-color: red;
     color: white;
     border-radius: 8px;
