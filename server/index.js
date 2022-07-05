@@ -20,7 +20,6 @@ const config = {
     connectionString: DATABASE_URL
 };
 
-// we normally only have a DATABAE_URL when we are on the Heroku server
 if (process.env.DATABASE_URL) {
     config.ssl = { rejectUnauthorized: false };
 }
