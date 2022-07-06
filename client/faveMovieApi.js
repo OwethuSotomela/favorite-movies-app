@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+const URL_BASE = import.meta.env.VITE_SERVER_URL;
+
 const appState = {
     Login: 'LOGIN',
     Signup: 'SIGNUP',
@@ -46,7 +48,7 @@ export default function MovieAPI() {
             try {
                 const signupUser = this.user
                 axios
-                    .post('http://localhost:5000/api/signup', signupUser)
+                    .post(`${URL_BASE}/api/signup`, signupUser)
                     .then((myApp) => {
                         console.log(myApp.data)
                         this.feedback = myApp.data.message
@@ -65,7 +67,7 @@ export default function MovieAPI() {
         login() {
             const loginUser = this.logUser;
             axios
-                .post('http://localhost:5000/api/login', loginUser)
+                .post(`${URL_BASE}/api/login`, loginUser)
                 .then((myApp) => {
                     console.log(myApp.data)
                     this.feedback = myApp.data.message
@@ -108,7 +110,7 @@ export default function MovieAPI() {
             try {
                 const { username } = this.user.username ? this.user : JSON.parse(localStorage.getItem('user'))
                 axios
-                    .post(`http://localhost:5000/api/movie/${addFaveMovie.id}`, { username })
+                    .post(`${URL_BASE}/api/movie/${addFaveMovie.id}`, { username })
                     .then(result => result.data)
                     .then((data) => {
                         this.gettingUserPlaylist()
@@ -124,7 +126,7 @@ export default function MovieAPI() {
         gettingUserPlaylist() {
             const { username } = this.user.username ? this.user : JSON.parse(localStorage.getItem('user'))
             axios
-                .get(`http://localhost:5000/api/playlist/${username}`)
+                .get(`${URL_BASE}/api/playlist/${username}`)
                 .then(r => r.data)
                 .then((myMovies) => {
 
@@ -140,7 +142,7 @@ export default function MovieAPI() {
         deleteMovie(faveMovie) {
             try {
                 axios
-                    .delete(`http://localhost:5000/api/playlist/${faveMovie.id}`)
+                    .delete(`${URL_BASE}/api/playlist/${faveMovie.id}`)
                     .then(() => this.gettingUserPlaylist())
                     .catch(e => {
                         console.log(e);
