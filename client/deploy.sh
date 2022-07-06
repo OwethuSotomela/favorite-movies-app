@@ -19,7 +19,7 @@ git commit -m 'deploy'
 
 # Add your GitHub repo details here
 
-git push -f https://github.com/OwethuSotomela/favorite-movies-app.git main:gh-pages
+git push -f https://github.com/OwethuSotomela/movies-app.git main:gh-pages
 
 
 cd - 
