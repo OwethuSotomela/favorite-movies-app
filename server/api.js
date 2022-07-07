@@ -63,16 +63,12 @@ module.exports = function (app, db) {
             const user = await db.oneOrNone(`SELECT * FROM users WHERE username = $1`, [username]);
 
             if (!user) {
-                isValidUser = await bcrypt.compare(password, user.encrypted)
-
-                if (!isValidUser) {
-                    return res.status(500).json({
-                        success: false,
-                        access_token: null,
-                        user: null
-                    });
-                }
+                throw Error('User does not exist! Register new account')
             } else {
+                let isValidUser = await bcrypt.compare(password, user.password)
+                if(!isValidUser) {
+                    throw Error('Wrong password or username')
+                }
                 jwt.sign({ user }, 'secret', { expiresIn: '24h' }, (err, token) => {
                     return res.json({
                         success: true,
@@ -84,6 +80,9 @@ module.exports = function (app, db) {
 
         } catch (error) {
             console.error(error.message);
+            res.status(500).json({
+                error: error.message
+             })
         }
     })
 
@@ -108,6 +107,9 @@ module.exports = function (app, db) {
 
         } catch (error) {
             console.error(error.message);
+            res.status(500).json({
+                error: error.message
+             })
         }
     })
 

@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const URL_BASE = import.meta.env.VITE_SERVER_URL;
+const URL_Heroku = 'https://movies-app-os.herokuapp.com';
 
 const appState = {
     Login: 'LOGIN',
@@ -48,7 +49,7 @@ export default function MovieAPI() {
             try {
                 const signupUser = this.user
                 axios
-                    .post(`${URL_BASE}/api/signup`, signupUser)
+                    .post(`${URL_Heroku}/api/signup`, signupUser)
                     .then((myApp) => {
                         console.log(myApp.data)
                         this.feedback = myApp.data.message
@@ -67,7 +68,7 @@ export default function MovieAPI() {
         login() {
             const loginUser = this.logUser;
             axios
-                .post(`${URL_BASE}/api/login`, loginUser)
+                .post(`${URL_Heroku}/api/login`, loginUser)
                 .then((myApp) => {
                     console.log(myApp.data)
                     this.feedback = myApp.data.message
@@ -110,7 +111,7 @@ export default function MovieAPI() {
             try {
                 const { username } = this.user.username ? this.user : JSON.parse(localStorage.getItem('user'))
                 axios
-                    .post(`${URL_BASE}/api/movie/${addFaveMovie.id}`, { username })
+                    .post(`${URL_Heroku}/api/movie/${addFaveMovie.id}`, { username })
                     .then(result => result.data)
                     .then((data) => {
                         this.gettingUserPlaylist()
@@ -126,7 +127,7 @@ export default function MovieAPI() {
         gettingUserPlaylist() {
             const { username } = this.user.username ? this.user : JSON.parse(localStorage.getItem('user'))
             axios
-                .get(`${URL_BASE}/api/playlist/${username}`)
+                .get(`${URL_Heroku}/api/playlist/${username}`)
                 .then(r => r.data)
                 .then((myMovies) => {
 
@@ -142,7 +143,7 @@ export default function MovieAPI() {
         deleteMovie(faveMovie) {
             try {
                 axios
-                    .delete(`${URL_BASE}/api/playlist/${faveMovie.id}`)
+                    .delete(`${URL_Heroku}/api/playlist/${faveMovie.id}`)
                     .then(() => this.gettingUserPlaylist())
                     .catch(e => {
                         console.log(e);
