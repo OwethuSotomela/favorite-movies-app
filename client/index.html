@@ -54,6 +54,7 @@
 
             </div>
             <div x-show="appState == 'HOME'" class="myHome">
+                <center><span x-text="playfeed"></span></center>
                 <table>
                     <tr>
                         <th x-text="user.firstname"></th>
@@ -77,6 +78,8 @@
                 <div class="displayMovies">
                     <button @click="gettingUserPlaylist()" class="btn btn-outline-info">Go to Playlist</button>
                     <h5>Movies in Playlist <span x-text="myPlaylist.length"></span></h5>
+                    <center><span x-text="removefeed"></span></center>
+
                     <div class="userPlaylist">
                         <template x-for="faveMovie in myPlaylist">
                             <div class="movies">
@@ -87,7 +90,7 @@
                         </template>
                     </div>
                 </div>
-                
+
                 <button @click="logout()" class="btn btn-outline-danger">Logout</button>
             </div>
         </div>

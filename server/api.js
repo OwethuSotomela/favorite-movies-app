@@ -10,7 +10,6 @@ module.exports = function (app, db) {
             .then((myMovie) => {
                 return myMovie.data
             })
-
     }
 
     app.get('/api/test', function (req, res) {
@@ -66,7 +65,7 @@ module.exports = function (app, db) {
                 throw Error('User does not exist! Register new account')
             } else {
                 let isValidUser = await bcrypt.compare(password, user.password)
-                if(!isValidUser) {
+                if (!isValidUser) {
                     throw Error('Wrong password or username')
                 }
                 jwt.sign({ user }, 'secret', { expiresIn: '24h' }, (err, token) => {
@@ -81,8 +80,8 @@ module.exports = function (app, db) {
         } catch (error) {
             console.error(error.message);
             res.status(500).json({
-                error: error.message
-             })
+                message: error.message
+            })
         }
     })
 
@@ -95,8 +94,9 @@ module.exports = function (app, db) {
             const user = await db.oneOrNone(`SELECT * FROM users WHERE username = $1`, [username])
 
             if (!user) {
-                console.log('No one home')
+                throw Error('No user')
             } else {
+
                 await db.none(`INSERT INTO user_playlist (users_id, movie_list) VALUES ($1, $2)`, [user.id, id])
 
                 res.status(200).json({
@@ -109,7 +109,7 @@ module.exports = function (app, db) {
             console.error(error.message);
             res.status(500).json({
                 error: error.message
-             })
+            })
         }
     })
 
@@ -119,7 +119,7 @@ module.exports = function (app, db) {
             const { username } = req.params
 
             const user = await db.oneOrNone(`SELECT * FROM users WHERE username = $1`, [username])
-            
+
             if (!user) {
                 console.log('No user here')
             }
@@ -136,31 +136,31 @@ module.exports = function (app, db) {
                 user: user,
                 data: movies,
             })
-        } catch(e) {
+        } catch (e) {
             console.log(e)
             res.status(500).json({
-               error: e.message
+                error: e.message
             })
         }
     })
 
-	app.delete('/api/playlist/:id', async function (req, res) {
+    app.delete('/api/playlist/:id', async function (req, res) {
 
-		try {
-			const { id } = req.params;
-			const movieRemoved = await db.one(`DELETE FROM user_playlist WHERE movie_list = $1`, [id])
+        try {
+            const { id } = req.params;
+            const movieRemoved = await db.one(`DELETE FROM user_playlist WHERE movie_list = $1`, [id])
 
-			res.json({
-				message: 'Movie deleted',
-				data: movieRemoved
-			})
-		} catch (err) {
-			res.json({
-				status: 'Failed to delete',
-				error: err.stack
-			})
-		}
-	})
+            res.json({
+                message: 'Movie deleted',
+                data: movieRemoved
+            })
+        } catch (err) {
+            res.json({
+                status: 'Failed to delete',
+                error: err.stack
+            })
+        }
+    })
 
 }
 

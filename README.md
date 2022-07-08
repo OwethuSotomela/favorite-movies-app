@@ -1,6 +1,6 @@
 # Favorite-Movie-App
 
-[Faveorite-Movie-App](https://owethusotomela.github.io/favorite-movies-app/)
+[Faveorite-Movie-App](https://owethusotomela.github.io/movies-app/)
 
 * An app that allows users to search for their favorite movies & adds them into their playlist of favorite movies
 

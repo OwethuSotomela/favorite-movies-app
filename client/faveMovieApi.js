@@ -1,12 +1,13 @@
 import axios from 'axios';
 
-const URL_BASE = import.meta.env.VITE_SERVER_URL;
+// const URL_BASE = import.meta.env.VITE_SERVER_URL;
 const URL_Heroku = 'https://movies-app-os.herokuapp.com';
 
 const appState = {
     Login: 'LOGIN',
     Signup: 'SIGNUP',
     Home: 'HOME',
+    Playlist: 'PLAYLIST'
 }
 export default function MovieAPI() {
     return {
@@ -17,13 +18,22 @@ export default function MovieAPI() {
         name: null,
         pic: null,
         image: null,
-        feedback: null,
-        myPlaylist: null,
+        myPlaylist: [],
+
+        feedback: '',
+        playfeed: '',
+        removefeed: '',
+        movieAdded: 'New movie added to the playlist !',
+        movieRemoved: 'Movie removed from the playlist !',
+
         init() {
+            this.gettingUserPlaylist()
             if (localStorage['user'] !== 'undefined') {
-                this.isOpen = true;
-                this.appState = appState.Home
-                this.user = localStorage.getItem('user')
+                this.isOpen = false;
+                this.appState = appState.Login
+                if (localStorage['user']) {
+                    this.user = localStorage.getItem('user')
+                }
             }
         },
         user: {
@@ -48,6 +58,7 @@ export default function MovieAPI() {
         signup() {
             try {
                 const signupUser = this.user
+                console.log({ signupUser: this.user });
                 axios
                     .post(`${URL_Heroku}/api/signup`, signupUser)
                     .then((myApp) => {
@@ -86,11 +97,15 @@ export default function MovieAPI() {
                     localStorage.setItem('access_token', this.token);
                     setTimeout(() => {
                         this.token = ''
-                    }, 4000);
+                    }, 3000);
                     return true;
                 })
                 .catch((err) => {
                     console.log(err)
+                    this.feedback = err.response.data.message
+                    setTimeout(() => {
+                        this.feedback = ''
+                    }, 3000)
                 });
         },
         findMovies() {
@@ -116,10 +131,10 @@ export default function MovieAPI() {
                     .then((data) => {
                         this.gettingUserPlaylist()
                     })
-                this.feedback = data.message
+                this.playfeed = this.movieAdded
                 setTimeout(() => {
-                    this.feedback = ''
-                }, 3000)
+                    this.playfeed = ''
+                }, 4000)
             } catch (err) {
                 // alert(err.message);
             }
@@ -145,6 +160,11 @@ export default function MovieAPI() {
                 axios
                     .delete(`${URL_Heroku}/api/playlist/${faveMovie.id}`)
                     .then(() => this.gettingUserPlaylist())
+
+                this.removefeed = this.movieRemoved
+                setTimeout(() => {
+                    this.removefeed = ''
+                }, 4000)
                     .catch(e => {
                         console.log(e);
                         // alert('Error')
@@ -154,10 +174,13 @@ export default function MovieAPI() {
 
             }
         },
+        gotToPlaylist(){
+            this.appState = appState.Playlist
+        },
         logout() {
             this.isOpen = !this.isOpen
             this.appState = appState.Login
-            localStorage.clear()
+            // localStorage.clear()
         }
     }
 }
