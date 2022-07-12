@@ -27,7 +27,6 @@ export default function MovieAPI() {
         movieRemoved: 'Movie removed from the playlist !',
 
         init() {
-            this.gettingUserPlaylist()
             if (localStorage['user'] !== 'undefined') {
                 this.isOpen = false;
                 this.appState = appState.Login
@@ -180,7 +179,7 @@ export default function MovieAPI() {
         logout() {
             this.isOpen = !this.isOpen
             this.appState = appState.Login
-            // localStorage.clear()
+            localStorage.clear()
         }
     }
 }
