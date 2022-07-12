@@ -13,5 +13,4 @@ CREATE TABLE user_playlist(
     users_id int,
     movie_list VARCHAR NOT NULL,
     FOREIGN KEY (users_id) REFERENCES users(id)
-
-    );
+);
