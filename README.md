@@ -13,3 +13,4 @@ Once logged in:
     - They are be able to add movies into their playlist
     - Delete movies from the playlist
 
+[![Build Status](https://app.travis-ci.com/OwethuSotomela/movies-app.svg?branch=main)](https://app.travis-ci.com/OwethuSotomela/movies-app)
