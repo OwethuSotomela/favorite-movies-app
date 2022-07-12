@@ -2,6 +2,8 @@
 
 [Faveorite-Movie-App](https://owethusotomela.github.io/movies-app/)
 
+[![Build Status](https://app.travis-ci.com/OwethuSotomela/movies-app.svg?branch=main)](https://app.travis-ci.com/OwethuSotomela/movies-app)
+
 * An app that allows users to search for their favorite movies & adds them into their playlist of favorite movies
 
 * Users are able to register for an account
@@ -13,4 +15,3 @@ Once logged in:
     - They are be able to add movies into their playlist
     - Delete movies from the playlist
 
-[![Build Status](https://app.travis-ci.com/OwethuSotomela/movies-app.svg?branch=main)](https://app.travis-ci.com/OwethuSotomela/movies-app)
