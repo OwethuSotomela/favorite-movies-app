@@ -28,13 +28,26 @@ export default function MovieAPI() {
 
         init() {
             if (localStorage['user'] !== 'undefined') {
-                this.isOpen = false;
-                this.appState = appState.Login
+                this.isOpen = true;
+                // this.appState = appState.Login
                 if (localStorage['user']) {
                     this.user = localStorage.getItem('user')
+                    if (localStorage['screen']) {
+                        console.log(localStorage.getItem('screen'))
+                        alert(localStorage.getItem('screen'))
+                        localStorage.getItem('screen')
+                    } else{
+                        this.changeScreen(appState.Home)
+                    }
                 }
             }
         },
+
+        changeScreen(name){
+            this.appState = name;
+            localStorage.setItem('screen', name)
+        },
+
         user: {
             firstname: '',
             lastname: '',
@@ -80,7 +93,7 @@ export default function MovieAPI() {
             axios
                 .post(`${URL_Heroku}/api/login`, loginUser)
                 .then((myApp) => {
-                    console.log(myApp.data)
+                    // console.log(myApp.data)
                     this.feedback = myApp.data.message
                     var { access_token, user } = myApp.data;
 
@@ -173,7 +186,7 @@ export default function MovieAPI() {
 
             }
         },
-        gotToPlaylist(){
+        gotToPlaylist() {
             this.appState = appState.Playlist
         },
         logout() {

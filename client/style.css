@@ -1,12 +1,78 @@
-h1 {
-    text-align: center;
-    margin-top: 1em;
-    margin-bottom: 1em;
-    text-shadow: 2px 2px 5px #292929;
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: bold;
-    font-style: oblique;
+/* 21 Sep 2022  */
+
+body {
+    padding: 20px;
+    background-color: #2E3047;
 }
+
+h1 {
+    /* text-align: center; */
+    /* margin-top: 1em; */
+    /* margin-bottom: 1em; */
+    /* text-shadow: 2px 2px 5px #292929; */
+    /* font-family: 'Courier New', Courier, monospace; */
+    /* font-weight: bold; */
+    /* font-style: oblique; */
+
+    font-size: 40px;
+    margin-top: 0;
+    margin-bottom: 15px;
+    text-align: center;
+    font-family: Impact, serif;
+}
+
+.col-12 {
+    width: 80%;
+    background-color: #3C3F58;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+}
+
+.label {
+    margin-right: -9em;
+}
+
+.input {
+    margin-left: 10em;
+}
+
+.col-auto {
+    display: flex;
+    flex-direction: row;
+    margin-top: 5px;
+    margin-bottom: 1px;
+    align-items: center;
+    justify-content: center;
+}
+
+.signup {
+    text-align: center;
+}
+
+.signUpBtn {
+    margin: 1em;
+}
+
+.login {
+    text-align: center;
+}
+
+.loginBtn {
+    margin: 1em;
+}
+
+hr {
+    height: 10em;
+    background-color: black;
+    border-color: black;
+}
+
+.myHome{
+    background-color: #F6F6F2;
+}
+
+/* end  */
 
 h2 {
     text-align: center;
@@ -37,6 +103,7 @@ img {
     display: block;
 
 }
+
 .allMovies {
     display: flex;
     flex-wrap: wrap;
@@ -110,7 +177,3 @@ img {
 ::placeholder {
     text-align: center;
 }
-
-/* .feedback{
-    font-size: 3em;
-} */

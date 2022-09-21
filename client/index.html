@@ -15,83 +15,126 @@
     <div x-data="isOpen" class="container">
         <div class="row">
             <div class="col-12">
+
                 <h1>Favorite Movies APP</h1>
-            </div>
-            <div x-show="appState == 'SIGNUP'" class="signup">
-                <span x-text="feedback" class="feedback">Feedback</span>
-                <center>
-                    <h4>Signup</h4>
-                </center>
 
-                <label>Firstname</label>
-                <input type="text" x-model="user.firstname" placeholder="Enter your firstname">
-                <label>Lastname</label>
-                <input type="text" x-model="user.lastname" placeholder="Enter your lastname">
-                <br>
-                <label>Username</label>
-                <input type="text" x-model="user.username" placeholder="Create a username">
-                <label>Password</label>
-                <input type="password" x-model="user.password" placeholder="Enter your password">
-                <button @click="signup()" class="btn btn-outline-secondary">SignUp</button>
-                <br>
-                <a href="#" @click="gotToLogin()">Already have an account? Login</a>
-                <hr>
-
-            </div>
-            <div x-show="appState == 'LOGIN'" class="login">
-
-                <center>
-                    <h4>Login</h4>
-                </center>
-                <label>Username</label>
-                <input type="text" x-model="logUser.username" placeholder="Enter your username">
-                <label>Password</label>
-                <input type="password" x-model="logUser.password" placeholder="Enter your password">
-                <button @click="login()" class="btn btn-outline-success">Login</button>
-                <br>
-                <a href="#" @click="gotToSignUp()">Don't have account? SignUp</a>
-                <hr>
-
-            </div>
-            <div x-show="appState == 'HOME'" class="myHome">
-                <center><span x-text="playfeed"></span></center>
-                <table>
-                    <tr>
-                        <th x-text="user.firstname"></th>
-                        <th x-text="user.lastname"></th>
-                    </tr>
-                </table>
-                <label>Search for a movie</label>
-                <input type="text" x-model="movieSearch" placeholder="Movie name">
-                <button @click="findMovies()" class="btn btn-primary">Search</button>
-
-                <div class="allMovies">
-                    <template x-for="movie in moviesFound">
-                        <div class="movies">
-                            <h6 x-text="movie.title"></h6>
-                            <img x-bind:src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" />
-                            <button @click="addToPlaylist(movie)" class="addBtn">Add to playlist</button>
+                <div x-show="appState == 'SIGNUP'" class="signup">
+                    <span x-text="feedback" class="feedback">Feedback</span>
+                    <center>
+                        <h4>Signup</h4>
+                    </center>
+                    <div class="col-auto">
+                        <div class="label">
+                            <label for="firstname">Firstname:</label>
                         </div>
-                    </template>
+                        <div class="input">
+                            <input type="text" id="firstname" x-model="user.firstname"
+                                placeholder="Enter your firstname">
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="label">
+                            <label for="lastname">Lastname:</label>
+                        </div>
+                        <div class="input">
+                            <input type="text" id="lastname" x-model="user.lastname" placeholder="Enter your lastname">
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="label">
+                            <label for="username">Username:</label>
+                        </div>
+                        <div class="input">
+                            <input type="text" id="username" x-model="user.username" placeholder="Create a username">
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="label">
+                            <label for="password">Password:</label>
+                        </div>
+                        <div class="input">
+                            <input type="password" id="password" x-model="user.password"
+                                placeholder="Enter your password">
+                        </div>
+                    </div>
+
+                    <button @click="signup()" class="btn btn-outline-secondary signUpBtn">SignUp</button>
+                    <br>
+
+                    <a href="#" @click="gotToLogin()">Already have an account? Login</a>
+                    <hr>
                 </div>
 
-                <div class="displayMovies">
-                    <button @click="gettingUserPlaylist()" class="btn btn-outline-info">Go to Playlist</button>
-                    <h5>Movies in Playlist <span x-text="myPlaylist.length"></span></h5>
-                    <center><span x-text="removefeed"></span></center>
+                <div x-show="appState == 'LOGIN'" class="login">
+                    <center>
+                        <h4>Login</h4>
+                    </center>
 
-                    <div class="userPlaylist">
-                        <template x-for="faveMovie in myPlaylist">
+                    <div class="col-auto">
+                        <div class="label">
+                            <label for="username">Username:</label>
+                        </div>
+                        <div class="input">
+                            <input type="text" id="username" x-model="logUser.username"
+                                placeholder="Enter your username">
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="label">
+                            <label for="password">Password:</label>
+                        </div>
+                        <div class="input">
+                            <input type="password" id="password" x-model="logUser.password"
+                                placeholder="Enter your password">
+                        </div>
+                    </div>
+
+                    <button @click="login()" class="btn btn-outline-success loginBtn">Login</button>
+                    <br>
+                    <a href="#" @click="gotToSignUp()">Don't have account? SignUp</a>
+                    <hr>
+                </div>
+
+                <div x-show="appState == 'HOME'" class="myHome">
+                    <center><span x-text="playfeed"></span></center>
+                    <table>
+                        <tr>
+                            <th x-text="user.firstname"></th>
+                            <th x-text="user.lastname"></th>
+                        </tr>
+                    </table>
+                    <label>Search for a movie</label>
+                    <input type="text" x-model="movieSearch" placeholder="Movie name">
+                    <button @click="findMovies()" class="btn btn-primary">Search</button>
+
+                    <div class="allMovies">
+                        <template x-for="movie in moviesFound">
                             <div class="movies">
-                                <h3 x-text="faveMovie.title"></h3>
-                                <img x-bind:src="`https://image.tmdb.org/t/p/w500${faveMovie.poster_path}`" />
-                                <button @click="deleteMovie(faveMovie)" class="deleteBtn">x</button>
+                                <h6 x-text="movie.title"></h6>
+                                <img x-bind:src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" />
+                                <button @click="addToPlaylist(movie)" class="addBtn">Add to playlist</button>
                             </div>
                         </template>
                     </div>
+
+                    <div class="displayMovies">
+                        <button @click="gettingUserPlaylist()" class="btn btn-outline-info">Go to Playlist</button>
+                        <h5>Movies in Playlist <span x-text="myPlaylist.length"></span></h5>
+                        <center><span x-text="removefeed"></span></center>
+
+                        <div class="userPlaylist">
+                            <template x-for="faveMovie in myPlaylist">
+                                <div class="movies">
+                                    <h3 x-text="faveMovie.title"></h3>
+                                    <img x-bind:src="`https://image.tmdb.org/t/p/w500${faveMovie.poster_path}`" />
+                                    <button @click="deleteMovie(faveMovie)" class="deleteBtn">x</button>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                    <button @click="logout()" class="btn btn-outline-danger">Logout</button>
                 </div>
 
-                <button @click="logout()" class="btn btn-outline-danger">Logout</button>
             </div>
         </div>
     </div>
