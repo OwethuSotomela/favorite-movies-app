@@ -36,14 +36,17 @@ export default function MovieAPI() {
                         console.log(localStorage.getItem('screen'))
                         alert(localStorage.getItem('screen'))
                         localStorage.getItem('screen')
-                    } else{
+                    } else {
                         this.changeScreen(appState.Home)
+                    }
+                    if (localStorage["user"]) {
+                        this.user = localStorage.getItem("user");
                     }
                 }
             }
         },
 
-        changeScreen(name){
+        changeScreen(name) {
             this.appState = name;
             localStorage.setItem('screen', name)
         },
@@ -52,7 +55,8 @@ export default function MovieAPI() {
             firstname: '',
             lastname: '',
             username: '',
-            password: ''
+            password: '',
+            proPic: ''
         },
         logUser: {
             username: '',
@@ -61,11 +65,12 @@ export default function MovieAPI() {
         movieSearch: '',
         users: [],
         token: '',
+
         gotToSignUp() {
-            this.appState = appState.Signup;
+            this.changeScreen(appState.Signup);
         },
         gotToLogin() {
-            this.appState = appState.Login;
+            this.changeScreen(appState.Login);
         },
         signup() {
             try {
@@ -187,7 +192,7 @@ export default function MovieAPI() {
             }
         },
         gotToPlaylist() {
-            this.appState = appState.Playlist
+            this.changeScreen(appState.Playlist)
         },
         logout() {
             this.isOpen = !this.isOpen

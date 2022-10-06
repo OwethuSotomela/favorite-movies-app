@@ -1,8 +1,7 @@
-/* 21 Sep 2022  */
-
 body {
     padding: 20px;
-    background-color: #2E3047;
+    background-color: black;
+    /* background-color: #2E3047; */
 }
 
 h1 {
@@ -19,31 +18,50 @@ h1 {
     margin-bottom: 15px;
     text-align: center;
     font-family: Impact, serif;
+    color: black;
 }
 
 .col-12 {
     width: 80%;
-    background-color: #3C3F58;
+    /* background-color: #3C3F58; */
+    background-color: #2E3047;
     margin-left: auto;
     margin-right: auto;
     padding: 20px;
 }
 
-.label {
-    margin-right: -9em;
+label {
+    color: whitesmoke;
+    color: black;
 }
 
-.input {
-    margin-left: 10em;
+input {
+    margin-bottom: 5px;
+    text-align: center;
+    border: #3C3F58;
+}
+.myHome {
+    background-color: #F6F6F2;
+    padding: 20px;
 }
 
-.col-auto {
+.col-home {
     display: flex;
     flex-direction: row;
-    margin-top: 5px;
-    margin-bottom: 1px;
-    align-items: center;
     justify-content: center;
+}
+
+#movieSearch{
+    width: 20em;
+    margin: 5px;
+    height: 30px;
+    border: 2px solid #2E3047;
+}
+.searchLabel{
+    margin: 5px;
+}
+#primaryBtn{
+    margin-left: 5px;
 }
 
 .signup {
@@ -68,9 +86,6 @@ hr {
     border-color: black;
 }
 
-.myHome{
-    background-color: #F6F6F2;
-}
 
 /* end  */
 
