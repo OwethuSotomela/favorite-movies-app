@@ -25,8 +25,10 @@ export default function MovieAPI() {
         removefeed: '',
         movieAdded: 'New movie added to the playlist !',
         movieRemoved: 'Movie removed from the playlist !',
+        notSearched: 'Enter the name of the movie click search button',
 
         init() {
+
             if (localStorage['user'] !== 'undefined') {
                 this.isOpen = true;
                 // this.appState = appState.Login
@@ -59,8 +61,8 @@ export default function MovieAPI() {
             proPic: ''
         },
         logUser: {
-            username: '',
-            password: ''
+            username: 'OwSoto',
+            password: 'owe123'
         },
         movieSearch: '',
         users: [],
@@ -125,20 +127,42 @@ export default function MovieAPI() {
                     }, 3000)
                 });
         },
+
         findMovies() {
             const myKey = this.apiKey
             const findMovie = this.movieSearch
-            axios
-                .get(`https://api.themoviedb.org/3/search/movie?api_key=${myKey}&query=${findMovie}`)
-                .then((myMovies) => {
-                    const { results } = myMovies.data
-                    this.moviesFound = results
-                })
-                .then(console.log)
-                .catch((err) => {
-                    console.log(err)
-                });
+
+            if (!findMovie) {
+
+                setTimeout(() => {
+                    this.openPopup()
+                }, 1000)
+
+            } else {
+
+                axios
+                    .get(`https://api.themoviedb.org/3/search/movie?api_key=${myKey}&query=${findMovie}`)
+                    .then((myMovies) => {
+                        const { results } = myMovies.data
+                        this.moviesFound = results
+                        console.log(this.moviesFound)
+                    })
+                    .then(
+                        setTimeout(() => {
+                            this.displayMovies()
+                        })
+                    )
+                    .catch((err) => {
+                        console.log(err)
+                    });
+            }
+
         },
+
+        displayMovies() {
+            movies.classList.add("show-movies")
+        },
+
         addToPlaylist(addFaveMovie) {
             try {
                 const { username } = this.user.username ? this.user : JSON.parse(localStorage.getItem('user'))
@@ -157,6 +181,7 @@ export default function MovieAPI() {
             }
         },
         gettingUserPlaylist() {
+            alert("Are you working?")
             const { username } = this.user.username ? this.user : JSON.parse(localStorage.getItem('user'))
             axios
                 .get(`${URL_Heroku}/api/playlist/${username}`)
@@ -184,7 +209,6 @@ export default function MovieAPI() {
                 }, 4000)
                     .catch(e => {
                         console.log(e);
-                        // alert('Error')
                     })
             } catch (e) {
                 console.log(e.message)
@@ -198,6 +222,14 @@ export default function MovieAPI() {
             this.isOpen = !this.isOpen
             this.appState = appState.Login
             localStorage.clear()
+        },
+
+        // testing this popup here 
+        openPopup() {
+            popup.classList.add("open-popup")
+        },
+        closePopup() {
+            popup.classList.remove("open-popup")
         }
     }
 }

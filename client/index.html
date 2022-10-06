@@ -123,17 +123,25 @@
                                     <input type="text" id="movieSearch" x-model="movieSearch" placeholder="Movie name">
                                 </div>
                                 <button @click="findMovies()" class="btn btn-primary" id="primaryBtn">Search</button>
-
                             </div>
 
                             <div class="allMovies">
                                 <template x-for="movie in moviesFound">
-                                    <div class="movies">
+                                    <div class="movies" id="movies">
                                         <h6 x-text="movie.title"></h6>
                                         <img x-bind:src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" />
                                         <button @click="addToPlaylist(movie)" class="addBtn">Add to playlist</button>
                                     </div>
                                 </template>
+
+                                <!-- popup here  -->
+                                <div class="popup" id="popup">
+                                    <h2>No Movie Searched</h2>
+                                    <p x-text="notSearched"></p>
+                                    <button @click="closePopup()">OK</button>
+                                  </div>
+                                  <!-- end  -->
+                                  
                             </div>
                         </div>
                         <!-- Home end -->

@@ -40,6 +40,7 @@ input {
     text-align: center;
     border: #3C3F58;
 }
+
 .myHome {
     background-color: #F6F6F2;
     padding: 20px;
@@ -51,16 +52,18 @@ input {
     justify-content: center;
 }
 
-#movieSearch{
+#movieSearch {
     width: 20em;
     margin: 5px;
     height: 30px;
     border: 2px solid #2E3047;
 }
-.searchLabel{
+
+.searchLabel {
     margin: 5px;
 }
-#primaryBtn{
+
+#primaryBtn {
     margin-left: 5px;
 }
 
@@ -124,6 +127,8 @@ img {
     flex-wrap: wrap;
     margin-top: 2em;
     margin-bottom: 2em;
+    /* background-color: aqua; */
+    padding: 20px;
 }
 
 .userPlaylist {
@@ -131,6 +136,8 @@ img {
     flex-wrap: wrap;
     margin: 2em;
 }
+
+/* working here  */
 
 .movies {
     flex: 1;
@@ -140,7 +147,14 @@ img {
     margin: 0.25em;
     border-radius: 0.5em;
     box-shadow: 0 20px 25px 0 rgba(0, 0, 0, 1), 0 6px 20px 0 rgba(0, 0, 0, 1);
+    visibility: hidden;
 }
+
+.show-movies {
+    visibility: visible;
+}
+
+/* end  */
 
 .myFaveMovies {
     flex: 1;
@@ -192,3 +206,68 @@ img {
 ::placeholder {
     text-align: center;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+/* testing this popup here  */
+
+.popup {
+    width: 400px;
+    height: 250px;
+    background: #CCCCCC;
+    border-radius: 6px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding: 0 30px 30px;
+    color: #333;
+    visibility: hidden;
+    transition: transform 0.4s, top 0.4s;
+  
+  }
+  
+  .open-popup {
+    visibility: visible;
+    top: 50%;
+    transform: translate(-50%, -50) scale(1);
+  }  
+
+.popup img {
+    width: 100px;
+    margin-top: -50px;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .popup h2 {
+    font-size: 38px;
+    font-weight: 500;
+    margin: 30px 0 10px;
+  }
+  
+  .popup button {
+    width: 100%;
+    margin-top: 50px;
+    padding: 10px 0;
+    background: #6fd649;
+    color: #fff;
+    border: 0;
+    outline: none;
+    font-size: 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+  
+  }
+  
