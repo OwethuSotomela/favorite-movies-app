@@ -19,9 +19,9 @@
                 <h1>Favorite Movies APP</h1>
 
                 <main>
-                    <section>
 
-                        <!-- SignUp  -->
+                    <!-- SignUp  -->
+                    <section>
                         <div x-show="appState == 'SIGNUP'" class="signup">
                             <span x-text="feedback" class="feedback">Feedback</span>
                             <center>
@@ -70,9 +70,11 @@
                             <a href="#" @click="gotToLogin()">Already have an account? Login</a>
                             <hr>
                         </div>
-                        <!-- SignUp end -->
+                    </section>
+                    <!-- SignUp end -->
 
-                        <!-- Login  -->
+                    <!-- Login  -->
+                    <section>
                         <div x-show="appState == 'LOGIN'" class="login">
                             <center>
                                 <h4>Login</h4>
@@ -102,25 +104,31 @@
                             <a href="#" @click="gotToSignUp()">Don't have account? SignUp</a>
                             <hr>
                         </div>
-                        <!-- Login end  -->
+                    </section>
+                    <!-- Login end  -->
 
-                        <!-- Home  -->
+                    <!-- Home  -->
+                    <section>
                         <div x-show="appState == 'HOME'" class="myHome">
                             <center><span x-text="playfeed"></span></center>
-                            <table>
-                                <tr x-text="user.proPic"></tr>
-                                <tr>
-                                    <th x-text="user.firstname"></th>
-                                    <th x-text="user.lastname"></th>
-                                </tr>
-                            </table>
+
+                            <div class="loggedUser">
+                                <p x-text="user.firstname"></p>
+                                <p x-text="user.lastname"></p>
+                                <button @click="gettingUserPlaylist()" class="btn btn-outline-info"
+                                    id="getUserPlaylistBtn">Go to
+                                    Playlist</button>
+                                <button @click="logout()" class="btn btn-outline-danger" id="logouBtn">Logout</button>
+
+                            </div>
 
                             <div class="col-home">
                                 <div class="label">
                                     <label for="movieSearch" class="searchLabel">Search for a movie</label>
                                 </div>
                                 <div class="input">
-                                    <input type="text" id="movieSearch" x-model="movieSearch" placeholder="Movie name">
+                                    <input type="text" id="movieSearch" class="movieSearch" x-model="movieSearch"
+                                        placeholder="Movie name">
                                 </div>
                                 <button @click="findMovies()" class="btn btn-primary" id="primaryBtn">Search</button>
                             </div>
@@ -139,33 +147,30 @@
                                     <h2>No Movie Searched</h2>
                                     <p x-text="notSearched"></p>
                                     <button @click="closePopup()">OK</button>
-                                  </div>
-                                  <!-- end  -->
-                                  
-                            </div>
-                        </div>
-                        <!-- Home end -->
-
-
-                        <!-- <div class="displayMovies"> -->
-                        <button @click="gettingUserPlaylist()" class="btn btn-outline-info">Go to Playlist</button>
-
-                        <div x-show="appSate == 'PLAYLIST'" class="userPlaylist">
-                            <h5>Movies in Playlist <span x-text="myPlaylist.length"></span></h5>
-                            <center><span x-text="removefeed"></span></center>
-
-                            <template x-for="faveMovie in myPlaylist">
-                                <div class="movies">
-                                    <h3 x-text="faveMovie.title"></h3>
-                                    <img x-bind:src="`https://image.tmdb.org/t/p/w500${faveMovie.poster_path}`" />
-                                    <button @click="deleteMovie(faveMovie)" class="deleteBtn">x</button>
                                 </div>
-                            </template>
+                                <!-- end popup -->
+
+                            </div>
+
+                            <!-- User Playlist  -->
+                            <div x-show="appSate == 'PLAYLIST'" class="userPlaylist">
+                                <h5>Movies in Playlist <span x-text="myPlaylist.length"></span></h5>
+                                <center><span x-text="removefeed"></span></center>
+
+                                <template x-for="faveMovie in myPlaylist">
+                                    <div class="movies" id="movies">
+                                        <h3 x-text="faveMovie.title"></h3>
+                                        <img x-bind:src="`https://image.tmdb.org/t/p/w500${faveMovie.poster_path}`" />
+                                        <button @click="deleteMovie(faveMovie)" class="deleteBtn">x</button>
+                                    </div>
+                                </template>
+
+                            </div>
+                            <!-- User playlist end  -->
+
                         </div>
-                        <!-- </div> -->
-                        <button @click="logout()" class="btn btn-outline-danger">Logout</button>
-                        <!-- </div> -->
                     </section>
+
                 </main>
             </div>
         </div>

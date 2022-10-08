@@ -9,6 +9,7 @@ const appState = {
     Home: 'HOME',
     Playlist: 'PLAYLIST'
 }
+
 export default function MovieAPI() {
     return {
         appState: 'LOGIN',
@@ -108,7 +109,7 @@ export default function MovieAPI() {
                         return false
                     }
 
-                    this.appState = appState.Home
+                    this.changeScreen(appState.Home)
                     this.isOpen = true;
                     this.user = user;
                     localStorage.setItem('user', JSON.stringify(user));
@@ -126,6 +127,10 @@ export default function MovieAPI() {
                         this.feedback = ''
                     }, 3000)
                 });
+        },
+
+        displayMovies() {
+            movies.classList.add("show-movies")
         },
 
         findMovies() {
@@ -150,7 +155,7 @@ export default function MovieAPI() {
                     .then(
                         setTimeout(() => {
                             this.displayMovies()
-                        })
+                        }, 1000)
                     )
                     .catch((err) => {
                         console.log(err)
@@ -159,9 +164,9 @@ export default function MovieAPI() {
 
         },
 
-        displayMovies() {
-            movies.classList.add("show-movies")
-        },
+        // displayMovies() {
+        //     movies.classList.add("show-movies")
+        // },
 
         addToPlaylist(addFaveMovie) {
             try {
@@ -172,17 +177,25 @@ export default function MovieAPI() {
                     .then((data) => {
                         this.gettingUserPlaylist()
                     })
+
                 this.playfeed = this.movieAdded
                 setTimeout(() => {
                     this.playfeed = ''
                 }, 4000)
+
             } catch (err) {
-                // alert(err.message);
+
             }
         },
         gettingUserPlaylist() {
-            alert("Are you working?")
+            // alert("Are you working?")
+            // this.changeScreen(appState.Playlist)
+
             const { username } = this.user.username ? this.user : JSON.parse(localStorage.getItem('user'))
+
+            // this.changeScreen(appState.Playlist)
+
+
             axios
                 .get(`${URL_Heroku}/api/playlist/${username}`)
                 .then(r => r.data)
@@ -191,11 +204,23 @@ export default function MovieAPI() {
                     this.myPlaylist = myMovies.data
                     this.user = myMovies.user;
 
+                    console.log(this.myPlaylist)
+
                     localStorage.setItem('user', JSON.stringify(this.user));
-                }).catch(e => {
+                }).then(
+                    setTimeout(() => {
+                        this.displayMovies()
+                    }, 1000)
+                )
+                .catch(e => {
                     console.log(e);
                     // alert('Error')
                 })
+            // alert("Are you working here?")
+            // setTimeout(() => {
+            //     this.displayMovies()
+            // }, 1000)
+
         },
         deleteMovie(faveMovie) {
             try {
@@ -220,7 +245,7 @@ export default function MovieAPI() {
         },
         logout() {
             this.isOpen = !this.isOpen
-            this.appState = appState.Login
+            this.changeScreen(appState.Login)
             localStorage.clear()
         },
 
