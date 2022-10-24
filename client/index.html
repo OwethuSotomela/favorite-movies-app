@@ -82,19 +82,19 @@
 
                             <div class="col-auto">
                                 <div class="label">
-                                    <label for="username">Username</label>
+                                    <label for="loginusername">Username</label>
                                 </div>
                                 <div class="input">
-                                    <input type="text" id="username" x-model="logUser.username"
+                                    <input type="text" id="loginusername" x-model="logUser.username"
                                         placeholder="Enter your username" />
                                 </div>
                             </div>
                             <div class="col-auto">
                                 <div class="label">
-                                    <label for="password">Password</label>
+                                    <label for="loginpassword">Password</label>
                                 </div>
                                 <div class="input">
-                                    <input type="password" id="password" x-model="logUser.password"
+                                    <input type="password" id="loginpassword" x-model="logUser.password"
                                         placeholder="Enter your password">
                                 </div>
                             </div>
@@ -115,11 +115,9 @@
                             <div class="loggedUser">
                                 <p x-text="user.firstname"></p>
                                 <p x-text="user.lastname"></p>
-                                <button @click="gettingUserPlaylist()" class="btn btn-outline-info"
-                                    id="getUserPlaylistBtn">Go to
+                                <button @click="gettingUserPlaylist()" id="getUserPlaylistBtn">Go to
                                     Playlist</button>
-                                <button @click="logout()" class="btn btn-outline-danger" id="logouBtn">Logout</button>
-
+                                <button @click="logout()" id="logoutBtn">Logout</button>
                             </div>
 
                             <div class="col-home">
@@ -149,26 +147,27 @@
                                     <button @click="closePopup()">OK</button>
                                 </div>
                                 <!-- end popup -->
-
                             </div>
-
-                            <!-- User Playlist  -->
-                            <div x-show="appSate == 'PLAYLIST'" class="userPlaylist">
-                                <h5>Movies in Playlist <span x-text="myPlaylist.length"></span></h5>
-                                <center><span x-text="removefeed"></span></center>
-
-                                <template x-for="faveMovie in myPlaylist">
-                                    <div class="movies" id="movies">
-                                        <h3 x-text="faveMovie.title"></h3>
-                                        <img x-bind:src="`https://image.tmdb.org/t/p/w500${faveMovie.poster_path}`" />
-                                        <button @click="deleteMovie(faveMovie)" class="deleteBtn">x</button>
-                                    </div>
-                                </template>
-
-                            </div>
-                            <!-- User playlist end  -->
 
                         </div>
+                    </section>
+
+                    <section>
+                        <!-- User Playlist  -->
+                        <div x-show="appState == 'PLAYLIST'" class="userPlaylist">
+                            <h2>Movies in Playlist <span x-text="myPlaylist.length"></span></h2>
+                            <center><span x-text="removefeed"></span></center>
+
+                            <template x-for="faveMovie in myPlaylist">
+                                <div class="movies" id="movies">
+                                    <h3 x-text="faveMovie.title"></h3>
+                                    <img x-bind:src="`https://image.tmdb.org/t/p/w500${faveMovie.poster_path}`" />
+                                    <button @click="deleteMovie(faveMovie)" class="deleteBtn">x</button>
+                                </div>
+                            </template>
+                            <button @click="goHome()">Home</button>
+                        </div>
+                        <!-- User playlist end  -->
                     </section>
 
                 </main>

@@ -58,7 +58,8 @@ input {
     height: 30px;
     border: 2px solid #2E3047;
 }
-.loggedUser{
+
+.loggedUser {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
@@ -66,45 +67,60 @@ input {
     padding: 3px;
     /* background-color: #888888; */
     background-color: #2E3047;
-    
+
 }
-p{
+
+p {
     margin: 5px;
     color: white;
 }
-#getUserPlaylistBtn{
-    background-color: black;
-    /* background-color: #0D6EFD; */
-    /* background-color:#2D3E4E; */
-    margin-left: 10px;
-    /* background-color: #4CAF50;  */
-    /* Green */
-    /* border: none; */
-    border: 1px solid white;
+
+#getUserPlaylistBtn {
+
+    background-color: #555555;
+    margin-left: 5px;
+    border: none;
     color: white;
+    padding: 5px 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
 }
-#logouBtn{
+#getUserPlaylistBtn:hover {
+    background-color: #4CAF50; 
+    color: white;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  }
+
+#logoutBtn {
     /* background-color: black; */
-    background-color: #0D6EFD;
-    margin-left: 10px;
-    border: 1px solid white;
+
+    background-color: #555555;
+    margin-left: 3px;
+    border: none;
     color: white;
+    padding: 5px 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
 }
+#logoutBtn:hover {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  }
+
+
 @media (max-width: 600px) {
 
     .col-home {
         /* background-color: blue; */
         display: block;
     }
-    #movieSearch{
+
+    #movieSearch {
         width: 10em;
     }
 }
@@ -183,9 +199,11 @@ img {
 
 .userPlaylist {
     display: flex;
+    /* display: block; */
     flex-wrap: wrap;
     margin: 2em;
     background-color: #6fd649;
+    padding: 20px;
 }
 
 /* working here  */
@@ -198,7 +216,7 @@ img {
     margin: 0.25em;
     border-radius: 0.5em;
     box-shadow: 0 20px 25px 0 rgba(0, 0, 0, 1), 0 6px 20px 0 rgba(0, 0, 0, 1);
-    visibility: hidden;
+    /* visibility: hidden; */
 }
 
 .show-movies {
@@ -252,7 +270,6 @@ img {
 
 .myHome {
     margin-bottom: 2em;
-    /* height: 30em; */
 }
 
 ::placeholder {
@@ -328,28 +345,28 @@ table {
     width: 100%;
     margin-top: 1em;
     margin-bottom: 1em;
-  }
-  
-  table td,
-  table th {
+}
+
+table td,
+table th {
     border: 1px solid #ddd;
     padding: 4px;
     background-color: #888888;
 
-  }
-  
-  table tr:nth-child(even) {
+}
+
+table tr:nth-child(even) {
     /* background-color: #f2f2f2; */
-  }
-  
-  table tr:hover {
+}
+
+table tr:hover {
     background-color: #888888;
-  }
-  
-  table th {
+}
+
+table th {
     padding-top: 4px;
     padding-bottom: 4px;
     text-align: left;
     background-color: #0D6EFD;
     color: white;
-  }
+}

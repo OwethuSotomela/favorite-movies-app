@@ -1,5 +1,5 @@
 import Alpine from 'alpinejs';
-import './style.css'
+import './styles.css'
 import MovieAPI from './faveMovieApi';
 
 import persist from '@alpinejs/persist'

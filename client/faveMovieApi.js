@@ -36,7 +36,6 @@ export default function MovieAPI() {
                 if (localStorage['user']) {
                     this.user = localStorage.getItem('user')
                     if (localStorage['screen']) {
-                        console.log(localStorage.getItem('screen'))
                         alert(localStorage.getItem('screen'))
                         localStorage.getItem('screen')
                     } else {
@@ -101,7 +100,6 @@ export default function MovieAPI() {
             axios
                 .post(`${URL_Heroku}/api/login`, loginUser)
                 .then((myApp) => {
-                    // console.log(myApp.data)
                     this.feedback = myApp.data.message
                     var { access_token, user } = myApp.data;
 
@@ -127,10 +125,6 @@ export default function MovieAPI() {
                         this.feedback = ''
                     }, 3000)
                 });
-        },
-
-        displayMovies() {
-            movies.classList.add("show-movies")
         },
 
         findMovies() {
@@ -187,14 +181,10 @@ export default function MovieAPI() {
 
             }
         },
+
         gettingUserPlaylist() {
-            // alert("Are you working?")
-            // this.changeScreen(appState.Playlist)
 
             const { username } = this.user.username ? this.user : JSON.parse(localStorage.getItem('user'))
-
-            // this.changeScreen(appState.Playlist)
-
 
             axios
                 .get(`${URL_Heroku}/api/playlist/${username}`)
@@ -203,10 +193,11 @@ export default function MovieAPI() {
 
                     this.myPlaylist = myMovies.data
                     this.user = myMovies.user;
+                    this.changeScreen(appState.Playlist)
 
                     console.log(this.myPlaylist)
-
                     localStorage.setItem('user', JSON.stringify(this.user));
+                    // this.changeScreen(appState.Playlist)
                 }).then(
                     setTimeout(() => {
                         this.displayMovies()
@@ -216,12 +207,13 @@ export default function MovieAPI() {
                     console.log(e);
                     // alert('Error')
                 })
-            // alert("Are you working here?")
-            // setTimeout(() => {
-            //     this.displayMovies()
-            // }, 1000)
 
         },
+
+        displayMovies() {
+            movies.classList.add("show-movies")
+        },
+
         deleteMovie(faveMovie) {
             try {
                 axios
@@ -242,6 +234,9 @@ export default function MovieAPI() {
         },
         gotToPlaylist() {
             this.changeScreen(appState.Playlist)
+        },
+        goHome() {
+            this.changeScreen(appState.Home)
         },
         logout() {
             this.isOpen = !this.isOpen
