@@ -117,7 +117,7 @@
                                 <p x-text="user.lastname"></p>
                                 <button @click="gettingUserPlaylist()" id="getUserPlaylistBtn">Go to
                                     Playlist</button>
-                                <button @click="logout()" id="logoutBtn">Logout</button>
+                                <button @click="logout()" class="logoutBtn">Logout</button>
                             </div>
 
                             <div class="col-home">
@@ -154,18 +154,26 @@
 
                     <section>
                         <!-- User Playlist  -->
-                        <div x-show="appState == 'PLAYLIST'" class="userPlaylist">
-                            <h2>Movies in Playlist <span x-text="myPlaylist.length"></span></h2>
-                            <center><span x-text="removefeed"></span></center>
+                        <div x-show="appState == 'PLAYLIST'" class="myHome">
 
-                            <template x-for="faveMovie in myPlaylist">
-                                <div class="movies" id="movies">
-                                    <h3 x-text="faveMovie.title"></h3>
-                                    <img x-bind:src="`https://image.tmdb.org/t/p/w500${faveMovie.poster_path}`" />
-                                    <button @click="deleteMovie(faveMovie)" class="deleteBtn">x</button>
-                                </div>
-                            </template>
-                            <button @click="goHome()">Home</button>
+                            <div class="loggedUser">
+                                <p>Movies in Playlist <span x-text="myPlaylist.length"></span></p>
+                                <center><span x-text="removefeed"></span></center>
+                                <button @click="goHome()" class="homeBtn">Home</button>
+                                <button @click="logout()" class="logoutBtn">Logout</button>
+                            </div>
+
+                            <div class="allMovies">
+
+                                <template x-for="faveMovie in myPlaylist">
+                                    <div class="movies" id="movies">
+                                        <h3 x-text="faveMovie.title"></h3>
+                                        <img x-bind:src="`https://image.tmdb.org/t/p/w500${faveMovie.poster_path}`" />
+                                        <button @click="deleteMovie(faveMovie)" class="deleteBtn">x</button>
+                                    </div>
+                                </template>
+
+                            </div>
                         </div>
                         <!-- User playlist end  -->
                     </section>
