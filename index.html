@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Fave Movies API</title>
+  <script type="module" crossorigin src="/movies-app/assets/index.97bef853.js"></script>
+  <link rel="stylesheet" href="/movies-app/assets/index.24c361af.css">
+</head>
+
+<body>
+
+    <div x-data="isOpen" class="container">
+        <div class="row">
+            <div class="col-12">
+
+                <h1>Favorite Movies APP</h1>
+
+                <main>
+
+                    <!-- SignUp  -->
+                    <section>
+                        <div x-show="appState == 'SIGNUP'" class="signup">
+                            <span x-text="feedback" class="feedback">Feedback</span>
+                            <center>
+                                <h4>Signup</h4>
+                            </center>
+                            <div class="col-auto">
+                                <div class="label">
+                                    <label for="firstname">Firstname</label>
+                                </div>
+                                <div class="input">
+                                    <input type="text" id="firstname" x-model="user.firstname"
+                                        placeholder="Enter your firstname">
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <div class="label">
+                                    <label for="lastname">Lastname</label>
+                                </div>
+                                <div class="input">
+                                    <input type="text" id="lastname" x-model="user.lastname"
+                                        placeholder="Enter your lastname">
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <div class="label">
+                                    <label for="username">Username</label>
+                                </div>
+                                <div class="input">
+                                    <input type="text" id="username" x-model="user.username"
+                                        placeholder="Create a username">
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <div class="label">
+                                    <label for="password">Password</label>
+                                </div>
+                                <div class="input">
+                                    <input type="password" id="password" x-model="user.password"
+                                        placeholder="Enter your password">
+                                </div>
+                            </div>
+
+                            <button @click="signup()" class="btn btn-outline-secondary signUpBtn">SignUp</button>
+                            <br>
+
+                            <a href="#" @click="gotToLogin()">Already have an account? Login</a>
+                            <hr>
+                        </div>
+                    </section>
+                    <!-- SignUp end -->
+
+                    <!-- Login  -->
+                    <section>
+                        <div x-show="appState == 'LOGIN'" class="login">
+                            <center>
+                                <h4>Login</h4>
+                            </center>
+
+                            <div class="col-auto">
+                                <div class="label">
+                                    <label for="loginusername">Username</label>
+                                </div>
+                                <div class="input">
+                                    <input type="text" id="loginusername" x-model="logUser.username"
+                                        placeholder="Enter your username" />
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <div class="label">
+                                    <label for="loginpassword">Password</label>
+                                </div>
+                                <div class="input">
+                                    <input type="password" id="loginpassword" x-model="logUser.password"
+                                        placeholder="Enter your password">
+                                </div>
+                            </div>
+
+                            <button @click="login()" class="btn btn-outline-success loginBtn">Login</button>
+                            <br>
+                            <a href="#" @click="gotToSignUp()">Don't have account? SignUp</a>
+                            <hr>
+                        </div>
+                    </section>
+                    <!-- Login end  -->
+
+                    <!-- Home  -->
+                    <section>
+                        <div x-show="appState == 'HOME'" class="myHome">
+                            <center><span x-text="playfeed"></span></center>
+
+                            <div class="loggedUser">
+                                <p x-text="user.firstname"></p>
+                                <p x-text="user.lastname"></p>
+                                <button @click="gettingUserPlaylist()" id="getUserPlaylistBtn">Go to
+                                    Playlist</button>
+                                <button @click="logout()" class="logoutBtn">Logout</button>
+                            </div>
+
+                            <div class="col-home">
+                                <div class="label">
+                                    <label for="movieSearch" class="searchLabel">Search for a movie</label>
+                                </div>
+                                <div class="input">
+                                    <input type="text" id="movieSearch" class="movieSearch" x-model="movieSearch"
+                                        placeholder="Movie name">
+                                </div>
+                                <button @click="findMovies()" class="btn btn-primary" id="primaryBtn">Search</button>
+                            </div>
+
+                            <div class="allMovies">
+                                <template x-for="movie in moviesFound">
+                                    <div class="movies" id="movies">
+                                        <h6 x-text="movie.title"></h6>
+                                        <img x-bind:src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" />
+                                        <button @click="addToPlaylist(movie)" class="addBtn">Add to playlist</button>
+                                    </div>
+                                </template>
+
+                                <!-- popup here  -->
+                                <div class="popup" id="popup">
+                                    <h2>No Movie Searched</h2>
+                                    <p x-text="notSearched"></p>
+                                    <button @click="closePopup()">OK</button>
+                                </div>
+                                <!-- end popup -->
+                            </div>
+
+                        </div>
+                    </section>
+
+                    <section>
+                        <!-- User Playlist  -->
+                        <div x-show="appState == 'PLAYLIST'" class="myHome">
+
+                            <div class="loggedUser">
+                                <p>Movies in Playlist <span x-text="myPlaylist.length"></span></p>
+                                <center><span x-text="removefeed"></span></center>
+                                <button @click="goHome()" class="homeBtn">Home</button>
+                                <button @click="logout()" class="logoutBtn">Logout</button>
+                            </div>
+
+                            <div class="allMovies">
+
+                                <template x-for="faveMovie in myPlaylist">
+                                    <div class="movies" id="movies">
+                                        <h6 x-text="faveMovie.title"></h6>
+                                        <img x-bind:src="`https://image.tmdb.org/t/p/w500${faveMovie.poster_path}`" />
+                                        <button @click="deleteMovie(faveMovie)" class="deleteBtn">x</button>
+                                    </div>
+                                </template>
+                                <!-- example -->
+                                <!-- <nav aria-label="Page navigation example">
+                                    <ul class="pagination">
+
+                                <template x-for="faveMovie in myPlaylist">
+                                    <div class="movies" id="movies">
+                                        <h6 x-text="faveMovie.title"></h6>
+                                        <img x-bind:src="`https://image.tmdb.org/t/p/w500${faveMovie.poster_path}`" />
+                                        <button @click="deleteMovie(faveMovie)" class="deleteBtn">x</button>
+                                    </div>
+                                </template>
+                                      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                      <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                      <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                      <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                      <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                    </ul>
+                                  </nav> -->
+                                  <!-- end example  -->
+
+                            </div>
+                        </div>
+                        <!-- User playlist end  -->
+                    </section>
+
+                </main>
+            </div>
+        </div>
+    </div>
+
+    
+</body>
+
+</html>
