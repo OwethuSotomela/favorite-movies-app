@@ -211,7 +211,7 @@ export default function MovieAPI() {
         },
 
         displayMovies() {
-            allMovies.classList.add("show-movies")
+            movies.classList.add("show-movies")
         },
 
         deleteMovie(faveMovie) {
