@@ -197,7 +197,7 @@ export default function MovieAPI() {
 
                     console.log(this.myPlaylist)
                     localStorage.setItem('user', JSON.stringify(this.user));
-                    // this.changeScreen(appState.Playlist)
+                    
                 }).then(
                     setTimeout(() => {
                         this.displayMovies()
